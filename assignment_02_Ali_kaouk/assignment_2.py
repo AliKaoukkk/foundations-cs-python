@@ -1,28 +1,43 @@
-def digitCount(n):
-  if n < 10:
-    return 1
-  else:
-    return 1 + digitCount(n / 10)
-def recursiveMax(a):
-  if len(a) == 1:
-    return a[0]
-  else:
-    return a[0] if a[0] > recursiveMax(a[1:]) else recursiveMax(a[1:])
-def displayMenu():
-  print("1-Count Digits\n" + "2-Find Max\n" + "3-Exit")
-def mainFunction():
-  displayMenu()
-  choice = int(input('enter a number'))
-  while (choice != 3):
-    if (choice == 1):
-      n = int(input('enter a number'))
-      digitCount(n)
-    elif (choice == 2):
-      user_input = input('enter a number')
-      a = list(map(int, user_input.split()))
-      recursiveMax(a)
+def countDigits(number):
+    if (number < 10):
+        return 1
     else:
-      print('invalid input')
-  print('thanks for using my program')
+        return 1 + countDigits(number // 10)
+
+
+def maximumNumber(lst):
+    if (len(lst) == 0):
+        return 0
+    elif (len(lst) == 1):
+        return lst[0]
+    else:
+        total_max = maximumNumber(lst[1:])
+        return lst[0] if lst[0] > total_max else total_max
+
+
+def displayMenu():
+    print("1-count digits\n" + "2-Find Max\n" + "3-Exit")
+    print('-' * 20)
+
+
+def mainFunction():
+    displayMenu()
+    choice = int((input('choose a number')))
+    while (choice != 3):
+        if (choice == 1):
+            number = int((input('enter a number to count digit')))
+            max_digits = countDigits(number)
+            print('number of digits', max_digits)
+        elif (choice == 2):
+            lst_1 = (input('choose numbers seperated with spaces'))
+            lst_result = list(map(int, lst_1.split()))
+            max_number = maximumNumber(lst_result)
+            print(max_number)
+        else:
+            print('invalid input')
+        displayMenu()
+        choice = int(input('choose a number'))
+    print('thanks for using my program')
+
 
 mainFunction()
